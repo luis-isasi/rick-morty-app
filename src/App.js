@@ -10,40 +10,34 @@ function App() {
     (async () => {
       const response = await fetch("https://rickandmortyapi.com/api/character");
       const data = await response.json();
-      console.log({ data });
       setCharacters(data.results);
     })();
   }, []);
 
+  console.log({ characters });
+
   const renderCharacters = () => {
     return characters.map((character, i) => {
       return (
-        <div key={i}>
-          <h1>{character.name}</h1>
+        <div className="card" key={i}>
+          <div className="card-title">
+            <h3>Nombre: {character.name}</h3>
+            <h3>Genero: {character.gender}</h3>
+            <h3>Estado: {character.status}</h3>
+          </div>
+          <figure className="card-figure">
+            <img src={character.image} alt={character.name} />
+          </figure>
         </div>
       );
     });
   };
 
-  console.log({ characters });
-
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>Hola comunidad GDSC</p>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
         {characters.length > 0 && renderCharacters()}
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
     </div>
   );
